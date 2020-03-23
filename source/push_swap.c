@@ -31,26 +31,56 @@ void ps_init(t_ps *ps)
     ps->len_b = 0;
 }
 
+int ft_count_p(long long number, const int base)
+{
+	int	count;
+
+	count = number < 0 ? 2 : 1;
+    number = number < 0 ? -number : number;
+	while (number / base)
+	{
+		number /= base;
+		count++;
+	}
+	return (count);
+}
+
 void ps_print(t_ps *ps)
 {
     int i;
+    int size;
 
-    if (ps->len_a > 0)
+    size = (ps->len_a > ps->len_b) ? ps->len_a : ps->len_b;
+
+    while (--size >= 0)
     {
-        printf("stack a, length %d\n", ps->len_a);
-        i = ps->len_a - 1;
-        while (i >= 0)
-            printf("%d ", ps->a[i--]);
-        printf("\n");
+        if (size <= ps->len_a && ps->len_a != 0)
+            ft_putnbr(ps->a[size]);
+        i = 13 - ft_count_p(ps->a[size], 10);
+        while (i-- > 0)
+            write(1, " ", 1);
+        if (size <= ps->len_b && ps->len_b != 0)
+            ft_putnbr(ps->b[size]);
+        write(1, "\n", 1);
     }
-    if (ps->len_b > 0)
-    {
-        printf("stack b, length %d\n", ps->len_b);
-        i = ps->len_b - 1;
-        while (i >= 0)
-            printf("%d ", ps->b[i--]);
-        printf("\n");
-    }
+    ft_putstr("\\\\ stack a //\\\\ stack b //\n");
+
+    // if (ps->len_a > 0)
+    // {
+    //     printf("stack a, length %d\n", ps->len_a);
+    //     i = ps->len_a - 1;
+    //     while (i >= 0)
+    //         printf("%d ", ps->a[i--]);
+    //     printf("\n");
+    // }
+    // if (ps->len_b > 0)
+    // {
+    //     printf("stack b, length %d\n", ps->len_b);
+    //     i = ps->len_b - 1;
+    //     while (i >= 0)
+    //         printf("%d ", ps->b[i--]);
+    //     printf("\n");
+    // }
 }
 
 void ps_sa(t_ps *ps)
@@ -169,40 +199,62 @@ void ps_rrr(t_ps *ps)
     ps_rrb(ps);
 }
 
-int ft_count_p(long long number, const int base)
+int ps_duplicate(t_ps *ps, int number)
 {
-	int	count;
+    int i;
 
-	count = number < 0 ? 2 : 1;
-    number = number < 0 ? -number : number;
-	while (number / base)
-	{
-		number /= base;
-		count++;
-	}
-	return (count);
+    i = ps->len_a;
+    while (--i >= 0)
+        if (number == ps->a[i])
+            return (1);
+    return (0);
+}
+
+void ps_exit(char *const message)
+{
+    ft_putstr(message); // error status?
+    exit(0);            // param valid? 
+}
+
+
+int	ft_is_space(int c)
+{
+	if (' ' == c || '\n' == c || '\t' == c ||
+        '\f' == c || '\r' == c || '\v' == c)
+		return (1);
+	return (0);
 }
 
 void pw_read_a(t_ps *ps, char *str)
 {
     int i;
-    int count;
+    // int count;
 
     i = 0;
-    count = 0;
+    // count = 0;
     while(str[i])
     {
-        while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-                || str[i] == '\f' || str[i] == '\r' || str[i] == '\v')
+        while (ft_is_space(str[i]))
             ++i;
         if (str[i])
-            ps->a[count++] = ft_atoi(str + i);
-        while (str[i] >= '0' && str[i] <= '9')
+        {
+            if (!ps_duplicate(ps, ft_atoi(str + i)))
+            {
+                ps->a[ps->len_a++] = ft_atoi(str + i);
+                ps_ra(ps);
+            }
+            else
+                ps_exit("Error\n");
+        }
+        while (ft_isdigit(str[i]))
             ++i;
+        if (!ft_isdigit(str[i]) && !ft_is_space(str[i]) && str[i])
+            ps_exit("Error\n");
+        // ps_print(ps);
         // i += ft_count_p(ps->a[count], 10);
         // ++count;
     }
-    ps->len_a += count;
+    // ps->len_a += count;
 }
 
 int main(int ac, char **av)
