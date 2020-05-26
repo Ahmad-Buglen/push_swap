@@ -16,8 +16,10 @@ void ps_init(t_ps *const ps)
 {
     ft_bzero(ps->a, SIZE * sizeof(t_box));
     ft_bzero(ps->b, SIZE * sizeof(t_box));
+    ft_bzero(ps->oper, BUFF * sizeof(int));
     ps->len_a = 0;
     ps->len_b = 0;
+    ps->len_o = 0;
 }
 
 int ft_count_p(long long number, const int base)
@@ -41,28 +43,61 @@ void ps_print(t_ps *const ps)
 
     size = (ps->len_a > ps->len_b) ? ps->len_a : ps->len_b;
 
-    while (size > 0)
+        printf("\n--------------------------------------\n");
+    while (--size >= 0)
     {
-        if (size <= ps->len_a)
-        {
-            ft_putnbr(ps->a[size - 1].number);
-            ft_putstr(" (");
-            ft_putnbr(ps->a[size - 1].index);
-            ft_putstr(") ");
-        }
-        i = 25 - (ft_count_p(ps->a[size - 1].number, 10) + ft_count_p(ps->a[size - 1].index, 10));
-        while (i-- > 0)
-            write(1, " ", 1);
-        if (size-- <= ps->len_b)
-        {
-            ft_putnbr(ps->b[size].number);
-            ft_putstr(" (");
-            ft_putnbr(ps->b[size].index);
-            ft_putstr(" )");
-        }
-        write(1, "\n", 1);
+        printf("|%3d| ", size);
+        // ft_putnbr(size - 1);
+        // ft_putstr(" | ");
+        if (size < ps->len_a)
+            printf("%7d (%d) [%d] %s", ps->a[size].number, ps->a[size].index, ps->a[size].weight,
+                    1 == ps->a[size].bool ? "t" : "f");
+        else
+            printf("                    ");
+        if (size < ps->len_b)
+            printf("  %7d (%d) [%d] %s", ps->b[size].number, ps->b[size].index, ps->b[size].weight,
+                    1 == ps->a[size].bool ? "t" : "f");
+        else
+            printf("                    ");
+        // {
+        //     ft_putnbr(ps->a[size - 1].number);
+        //     ft_putstr(" (");
+        //     ft_putnbr(ps->a[size - 1].index);
+        //     ft_putstr(") ");
+        //     if (1 == ps->a[size - 1].bool)
+        //         ft_putstr("true  ");
+        //     else
+        //         ft_putstr("false ");
+        //     ft_putstr("|");
+        //     ft_putnbr(ps->a[size - 1].weight);
+        //     ft_putstr("| ");
+        // }
+        // else
+        // {
+        //     ft_putstr("                    ");
+        // }
+        // i = 25 - (ft_count_p(ps->a[size - 1].number, 10) + ft_count_p(ps->a[size - 1].index, 10));
+        // while (i-- > 0)
+        //     write(1, " ", 1);
+        // {
+        //     ft_putnbr(size);
+        //     ft_putstr(" - ");
+        //     ft_putnbr(ps->b[size].number);
+        //     ft_putstr(" (");
+        //     ft_putnbr(ps->b[size].index);
+        //     ft_putstr(") ");
+        //     if (1 == ps->b[size].bool)
+        //         ft_putstr("true  ");
+        //     else
+        //         ft_putstr("false ");
+        //     ft_putstr("|");
+        //     ft_putnbr(ps->b[size].weight);
+        //     ft_putstr("| ");
+        // }
+        printf("\n");
     }
-    ft_putstr("\\ stack a /               \\ stack b /\n");
+    printf("--------------------------------------\n");
+    printf("\\ stack a /           \\ stack b /\n");
 
     // if (ps->len_a > 0)
     // {
@@ -248,14 +283,14 @@ void ps_read_a(t_ps *const ps, char *const str)
                 ps_ra(ps);
             }
             else
-                ps_exit("Error\n");
+                ps_exit("Error1\n");
         }
         
-        while (ft_isdigit(str[i]))
+        while (ft_isdigit(str[i]) || '-' == str[i] || '+' == str[i])
             ++i;
             
-        if (!ft_isdigit(str[i]) && !ft_is_space(str[i]) && str[i])
-            ps_exit("Error\n");
+        if ((ft_isdigit(str[i]) || '-' == str[i] || '+' == str[i]) && !ft_is_space(str[i]) && str[i])
+            ps_exit("Error2\n");
         // ps_print(ps);
         // i += ft_count_p(ps->a[count], 10);
         // ++count;
@@ -304,5 +339,7 @@ int ps_is_sort(t_ps *const ps)
     while (--i > 0)
         if (ps->a[i].number >= ps->a[i - 1].number)
             return (0);
-    return (1);
+    if (ps->len_b != 0)
+        return (0);
+    return (1); 
 }

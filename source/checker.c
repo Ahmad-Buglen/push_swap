@@ -21,11 +21,14 @@ int main(int ac, char **av)
     if (ac == 3)
     {
         ps_read_a(&ps, av[1]);
-        ps_check(&ps, ft_strsplit(av[2], '|'));
+        // ps_print(&ps);
+        ps_check(&ps, ft_strsplit(av[2], DELIMETER_CHAR));
         if (1 == ps_is_sort(&ps))
             ft_putstr("OK\n"); // \n?
         else
             ft_putstr("KO\n"); // \n?
     }
-    ps_print(&ps);
+    else
+        ps_exit("Error\n");    
+    // ps_print(&ps);
 }

@@ -31,12 +31,12 @@ OBJECTS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+%.o: %.c $(HEADER)
+	gcc -Wall -Wextra -Werror -c $<
+
 $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
-
-%.o: %.c $(HEADER)
-	gcc -Wall -Wextra -Werror -c $<
 
 .PHONY: clean fclean re
 

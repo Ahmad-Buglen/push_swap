@@ -16,8 +16,14 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
+# define DELIMETER_CHAR ' '
+# define DELIMETER_STRING " "
 
 # define SIZE 1024
+# define BUFF 1000000
+
+# define STACK_A 1
+# define STACK_B 2
 
 # define SA 1
 # define SB 2
@@ -31,10 +37,14 @@
 # define RRB 10
 # define RRR 11
 
+# define OPER {RA, RB, RR, RRA, SA}
+
 typedef struct  s_box
 {
 	int         number;
 	int         index;
+	int			bool;
+	int			weight;
 }               t_box;
 
 typedef struct  s_ps
@@ -43,6 +53,8 @@ typedef struct  s_ps
     t_box       b[SIZE];
 	int         len_a;
 	int         len_b;
+	int			oper[BUFF];
+	int			len_o;
 }               t_ps;
 
 void ps_sa(t_ps *const ps);
