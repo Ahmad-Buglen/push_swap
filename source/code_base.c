@@ -22,19 +22,19 @@ void ps_init(t_ps *const ps)
     ps->len_o = 0;
 }
 
-int ft_count_p(long long number, const int base)
-{
-	int	count;
+// int ft_count_p(long long number, const int base)
+// {
+// 	int	count;
 
-	count = number < 0 ? 2 : 1;
-    number = number < 0 ? -number : number;
-	while (number / base)
-	{
-		number /= base;
-		count++;
-	}
-	return (count);
-}
+// 	count = number < 0 ? 2 : 1;
+//     number = number < 0 ? -number : number;
+// 	while (number / base)
+// 	{
+// 		number /= base;
+// 		count++;
+// 	}
+// 	return (count);
+// }
 
 void ps_print(t_ps *const ps)
 {
@@ -59,62 +59,10 @@ void ps_print(t_ps *const ps)
                     1 == ps->a[size].bool ? "t" : "f");
         else
             printf("                    ");
-        // {
-        //     ft_putnbr(ps->a[size - 1].number);
-        //     ft_putstr(" (");
-        //     ft_putnbr(ps->a[size - 1].index);
-        //     ft_putstr(") ");
-        //     if (1 == ps->a[size - 1].bool)
-        //         ft_putstr("true  ");
-        //     else
-        //         ft_putstr("false ");
-        //     ft_putstr("|");
-        //     ft_putnbr(ps->a[size - 1].weight);
-        //     ft_putstr("| ");
-        // }
-        // else
-        // {
-        //     ft_putstr("                    ");
-        // }
-        // i = 25 - (ft_count_p(ps->a[size - 1].number, 10) + ft_count_p(ps->a[size - 1].index, 10));
-        // while (i-- > 0)
-        //     write(1, " ", 1);
-        // {
-        //     ft_putnbr(size);
-        //     ft_putstr(" - ");
-        //     ft_putnbr(ps->b[size].number);
-        //     ft_putstr(" (");
-        //     ft_putnbr(ps->b[size].index);
-        //     ft_putstr(") ");
-        //     if (1 == ps->b[size].bool)
-        //         ft_putstr("true  ");
-        //     else
-        //         ft_putstr("false ");
-        //     ft_putstr("|");
-        //     ft_putnbr(ps->b[size].weight);
-        //     ft_putstr("| ");
-        // }
         printf("\n");
     }
     printf("--------------------------------------\n");
     printf("\\ stack a /           \\ stack b /\n");
-
-    // if (ps->len_a > 0)
-    // {
-    //     printf("stack a, length %d\n", ps->len_a);
-    //     i = ps->len_a - 1;
-    //     while (i >= 0)
-    //         printf("%d ", ps->a[i--]);
-    //     printf("\n");
-    // }
-    // if (ps->len_b > 0)
-    // {
-    //     printf("stack b, length %d\n", ps->len_b);
-    //     i = ps->len_b - 1;
-    //     while (i >= 0)
-    //         printf("%d ", ps->b[i--]);
-    //     printf("\n");
-    // }
 }
 
 void ps_sa(t_ps *const ps)
@@ -248,7 +196,7 @@ int ps_duplicate(t_ps *const ps, const int number)
 void ps_exit(char *const message)
 {
     ft_putstr(message); // error status?
-    exit(0);            // param valid? 
+    exit(1);            // param valid? 
 }
 
 
@@ -260,75 +208,79 @@ int	ft_is_space(const int c)
 	return (0);
 }
 
-void ps_read_a(t_ps *const ps, char *const str)
+void add_elem(t_ps *const ps, char *str)
 {
-    int i;
-    // int count;
-
-    i = 0;
-    // count = 0;
-    while(str[i])
+    if (!ps_duplicate(ps, ft_atol(str)) && //(ps->len_a + 1 < SIZE) &&
+            (ft_strlen(str) <= LEN_INT) &&
+            !((*str == '+' || *str == '-') && !ft_isdigit(*(str + 1))) &&
+                (ft_atol(str) >= MIN_INT && ft_atol(str) <= MAX_INT))
     {
-        while (ft_is_space(str[i]))
-            ++i;
-        if (str[i])
-        {
-            if (!ps_duplicate(ps, ft_atoi(str + i)))
-            {
-                // write(1, "here\n", 5);
-                // ft_putnbr(i);
-                //  write(1, "\n", 1);
-                ps->a[ps->len_a++].number = ft_atoi(str + i);
-                
-                ps_ra(ps);
-            }
-            else
-                ps_exit("Error1\n");
-        }
-        
-        while (ft_isdigit(str[i]) || '-' == str[i] || '+' == str[i])
-            ++i;
-            
-        if ((ft_isdigit(str[i]) || '-' == str[i] || '+' == str[i]) && !ft_is_space(str[i]) && str[i])
-            ps_exit("Error2\n");
-        // ps_print(ps);
-        // i += ft_count_p(ps->a[count], 10);
-        // ++count;
+        // if (ps->len_a == SIZE - 1)
+        //     ps_exit("Error9\n");
+        ps->a[ps->len_a++].number = ft_atoi(str);
+        ps_ra(ps);
     }
-    // ps->len_a += count;
+    else
+        ps_exit("Error9\n");  
 }
 
-void ps_check(t_ps *const ps, char ** oper)
+void ps_read_a(t_ps *const ps, int ac, char **av)
 {
     int i;
 
-    i = -1;
-    while(oper[++i])
-        if (0 == ft_strcmp(oper[i], "sa"))
+    if (ac > 2)
+    {
+        i = 0;
+        while (ac > ++i)
+            add_elem(ps, av[i]);
+    }
+    else
+    {
+        // ps_read_a(&ps, av[1]);
+        i = 0;
+        while(av[1][i])
+        {
+            while (ft_is_space(av[1][i]))
+                ++i;
+            if (av[1][i])
+                add_elem(ps, av[1] + i);
+            while (ft_isdigit(av[1][i]) || '-' == av[1][i] || '+' == av[1][i])
+                ++i;
+        }
+    }
+}
+
+void ps_check(t_ps *const ps, char **oper)
+{
+    // int i;
+
+    // i = -1;
+    // while(oper[++i])
+        if (0 == ft_strcmp(*oper, "sa"))
             ps_sa(ps);
-        else if (0 == ft_strcmp(oper[i], "sb"))
+        else if (0 == ft_strcmp(*oper, "sb"))
             ps_sb(ps);
-        else if (0 == ft_strcmp(oper[i], "ss"))
+        else if (0 == ft_strcmp(*oper, "ss"))
             ps_ss(ps);
-        else if (0 == ft_strcmp(oper[i], "pa"))
+        else if (0 == ft_strcmp(*oper, "pa"))
             ps_pa(ps);
-        else if (0 == ft_strcmp(oper[i], "pb"))
+        else if (0 == ft_strcmp(*oper, "pb"))
             ps_pb(ps);
-        else if (0 == ft_strcmp(oper[i], "ra"))
+        else if (0 == ft_strcmp(*oper, "ra"))
             ps_ra(ps);
-        else if (0 == ft_strcmp(oper[i], "rb"))
+        else if (0 == ft_strcmp(*oper, "rb"))
             ps_rb(ps);
-        else if (0 == ft_strcmp(oper[i], "rr"))
+        else if (0 == ft_strcmp(*oper, "rr"))
             ps_rr(ps);
-        else if (0 == ft_strcmp(oper[i], "rra"))
+        else if (0 == ft_strcmp(*oper, "rra"))
             ps_rra(ps);
-        else if (0 == ft_strcmp(oper[i], "rrb"))
+        else if (0 == ft_strcmp(*oper, "rrb"))
             ps_rrb(ps);
-        else if (0 == ft_strcmp(oper[i], "rrr"))
+        else if (0 == ft_strcmp(*oper, "rrr"))
             ps_rrr(ps);
         else
             ps_exit("Error\n");
-    ft_free_dual_char(&oper);
+    // ft_free_dual_char(oper);
 }
 
 int ps_is_sort(t_ps *const ps)
@@ -339,6 +291,7 @@ int ps_is_sort(t_ps *const ps)
     while (--i > 0)
         if (ps->a[i].number >= ps->a[i - 1].number)
             return (0);
+            
     if (ps->len_b != 0)
         return (0);
     return (1); 

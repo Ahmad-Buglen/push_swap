@@ -1,8 +1,8 @@
 #!/bin/bash
 
-count=5
+count=500
 
-cycle=1000
+cycle=1
 
 ok="OK"
 

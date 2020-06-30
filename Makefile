@@ -30,9 +30,10 @@ LIB = libft/libft.a
 
 HEADER = include/push_swap.h
 
-GENERATOR = generator
+# GENERATOR = generator
 
-all: $(LIB) $(CHECKER) $(SORT) $(GENERATOR)
+all: $(LIB) $(CHECKER) $(SORT) 
+# $(GENERATOR)
 
 $(LIB):  libft/libft.h
 	make -C libft
@@ -42,10 +43,10 @@ $(CHECKER): source/checker.c source/code_base.c $(HEADER) $(LIB)
 
 $(SORT): source/push_swap.c source/code_base.c $(HEADER) $(LIB)
 	gcc source/push_swap.c source/code_base.c $(LIB) -o push_swap
-	gcc -g source/push_swap.c source/code_base.c $(LIB) -o ps
+#gcc -g source/push_swap.c source/code_base.c $(LIB) -o ps
 
-$(GENERATOR): source/generator.c $(HEADER) $(LIB)
-	gcc ./source/generator.c $(LIB) -o generator
+# $(GENERATOR): source/generator.c $(HEADER) $(LIB)
+	# gcc ./source/generator.c $(LIB) -o generator
 
 #$(NAME): $(OBJ) $(LIB)
 #	ar rc $(NAME) $(OBJ) libft/*.o
@@ -58,10 +59,12 @@ $(GENERATOR): source/generator.c $(HEADER) $(LIB)
 #-Wall -Wextra -Werror
 %.o: source/%.c $(HEADER)
 	gcc -c $<
+
 clean:
 	make clean -C libft
 	rm -rf *.o
+
 fclean: clean
-	make fclean -C libft
-	rm -rf $(CHECKER) $(SORT) ps
+	rm -rf $(CHECKER) $(SORT) $(LIB)
+
 re: fclean all

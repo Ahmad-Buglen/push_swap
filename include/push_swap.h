@@ -16,11 +16,14 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-# define DELIMETER_CHAR ' '
-# define DELIMETER_STRING " "
+# define DELIMETER_CHAR '\n'
+# define DELIMETER_STRING "\n"
 
 # define SIZE 1024
-# define BUFF 1000000
+# define BUFF 1024
+# define MIN_INT -2147483648
+# define MAX_INT 2147483647
+# define LEN_INT 11
 
 # define STACK_A 1
 # define STACK_B 2
@@ -70,7 +73,7 @@ void ps_rrr(t_ps *const ps);
 void ps_rrb(t_ps *const ps);
 void ps_init(t_ps *const ps);		//const
 void ps_print(t_ps *const ps);	
-void ps_read_a(t_ps *ps, char *const str);	
+void ps_read_a(t_ps *const ps, int ac, char **av);
 void ps_check(t_ps *const ps, char ** oper);	
 int ps_is_sort(t_ps *const ps);	
 int ps_duplicate(t_ps *const ps, const int number);

@@ -16,19 +16,25 @@ int main(int ac, char **av)
 {
     int     i;
     t_ps    ps;
+    char    *oper;
+    int ret;
 
     ps_init(&ps);
-    if (ac == 3)
+    if (ac > 1)
     {
-        ps_read_a(&ps, av[1]);
-        // ps_print(&ps);
-        ps_check(&ps, ft_strsplit(av[2], DELIMETER_CHAR));
+        ps_read_a(&ps, ac, av);
+        while ((ret = get_next_line(0, &oper)) > 0)
+        {
+            ps_check(&ps, &oper);
+            free(oper);
+        }
         if (1 == ps_is_sort(&ps))
-            ft_putstr("OK\n"); // \n?
+            ft_putstr("OK\n");
         else
-            ft_putstr("KO\n"); // \n?
+            ft_putstr("KO\n");
+
+        // ps_print(&ps);
     }
-    else
-        ps_exit("Error\n");    
-    // ps_print(&ps);
+    // else
+    //     ps_exit("Error\n");
 }

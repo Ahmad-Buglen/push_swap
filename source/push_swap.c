@@ -510,17 +510,21 @@ int main(int ac, char **av)
     t_ps    ps;
 
     ps_init(&ps);
-    if (ac == 2)
+    if (ac > 1)
     {
-        ps_read_a(&ps, av[1]);
+        ps_read_a(&ps, ac, av);
         ps_index_set(&ps);
         // ps_print(&ps);
-        if (5 == ps.len_a)
-            little_sort(&ps);
-        else
-            ps_sort_insert(&ps);
-        optimization(&ps);
-        oper_print(&ps);
+        if (!ps_is_sort(&ps))
+        {
+            if (5 == ps.len_a)
+                little_sort(&ps);
+            else
+                ps_sort_insert(&ps);
+            optimization(&ps);
+            oper_print(&ps);
+        }
+        // ps_print(&ps);
     }
     // else
     //     write(1, "here1\n", 6);
