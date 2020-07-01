@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/25 12:53:08 by marvin            #+#    #+#             */
-/*   Updated: 2020/03/25 12:53:08 by marvin           ###   ########.fr       */
+/*   Created: 2020/07/01 14:52:54 by dphyliss          #+#    #+#             */
+/*   Updated: 2020/07/01 14:52:54 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 
 # define SIZE 1024
 # define BUFF 1024
+# define OPER 1000000
 # define MIN_INT -2147483648
 # define MAX_INT 2147483647
 # define LEN_INT 11
+# define FAILURE_EXIT 1
 
 # define STACK_A 1
 # define STACK_B 2
@@ -40,8 +42,6 @@
 # define RRB 10
 # define RRR 11
 
-# define OPER {RA, RB, RR, RRA, SA}
-
 typedef struct  s_box
 {
 	int         number;
@@ -56,9 +56,14 @@ typedef struct  s_ps
     t_box       b[SIZE];
 	int         len_a;
 	int         len_b;
-	int			oper[BUFF];
+	int			oper[OPER];
 	int			len_o;
 }               t_ps;
+
+ typedef struct	s_test 
+{
+	int			mas[5];
+}				t_test;
 
 void ps_sa(t_ps *const ps);
 void ps_sb(t_ps *const ps);
@@ -71,13 +76,19 @@ void ps_rr(t_ps *const ps);
 void ps_rra(t_ps *const ps);
 void ps_rrr(t_ps *const ps);
 void ps_rrb(t_ps *const ps);
-void ps_init(t_ps *const ps);		//const
-void ps_print(t_ps *const ps);	
-void ps_read_a(t_ps *const ps, int ac, char **av);
-void ps_check(t_ps *const ps, char ** oper);	
-int ps_is_sort(t_ps *const ps);	
-int ps_duplicate(t_ps *const ps, const int number);
-void ps_exit(char *const message);
-int	ft_is_space(const int c);
+
+void	ps_read_a(t_ps *const ps, const int ac, char *const *const av);
+int		ps_is_sort(t_ps *const ps);
+
+
+void	oper_add(t_ps *const ps, const int oper);
+void	transporter(t_ps *const ps);
+void	ps_sort_insert(t_ps *const ps);
+int		ps_position_a(t_ps *const ps, const int position_b);
+int		weight_b_to_a(t_ps *const ps, const int position_b);
+int		ps_max(t_ps *const ps);
+void	ps_index_set(t_ps *const ps);
+void	optimization(t_ps *const ps);
+int		first_sort(t_ps *const ps, const int algo);
 
 #endif

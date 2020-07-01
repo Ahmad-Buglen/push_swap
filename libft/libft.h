@@ -6,7 +6,7 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 15:43:44 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/06/30 15:17:26 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/01 19:12:58 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstgnladd(t_list_gnl **alst, t_list_gnl *new);
 long				ft_atol(const char *str);
+void				ft_exit_fail(char *const message);
+int					ft_is_space(const int c);
 
 #endif
