@@ -6,7 +6,7 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:39:13 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/01 18:58:23 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:31:35 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		weight_b_to_a(t_ps *const ps, const int position_b)
 // 	}
 // 	return (min);
 // }
+
 
 int		ps_max(t_ps *const ps)
 {

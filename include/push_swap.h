@@ -65,6 +65,7 @@ typedef struct  s_ps
 	int			mas[5];
 }				t_test;
 
+
 void ps_sa(t_ps *const ps);
 void ps_sb(t_ps *const ps);
 void ps_ss(t_ps *const ps);
@@ -77,9 +78,9 @@ void ps_rra(t_ps *const ps);
 void ps_rrr(t_ps *const ps);
 void ps_rrb(t_ps *const ps);
 
+
 void	ps_read_a(t_ps *const ps, const int ac, char *const *const av);
 int		ps_is_sort(t_ps *const ps);
-
 
 void	oper_add(t_ps *const ps, const int oper);
 void	transporter(t_ps *const ps);
