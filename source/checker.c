@@ -6,13 +6,13 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 16:49:51 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/01 19:27:24 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:35:44 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ps_check(t_ps *const ps, char *const *const oper)
+void		ps_check(t_ps *const ps, char *const *const oper)
 {
 	if (0 == ft_strcmp(*oper, "sa"))
 		ps_sa(ps);
@@ -42,7 +42,6 @@ void	ps_check(t_ps *const ps, char *const *const oper)
 
 int			main(int ac, char **av)
 {
-	int		i;
 	t_ps	ps;
 	char	*oper;
 	int		ret;

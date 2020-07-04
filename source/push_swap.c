@@ -6,13 +6,13 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:26:22 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/01 19:01:35 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:33:43 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	oper_add(t_ps *const ps, const int oper)
+void		oper_add(t_ps *const ps, const int oper)
 {
 	ps->oper[ps->len_o++] = oper;
 	if (SA == oper)
@@ -66,7 +66,6 @@ static void	oper_print(t_ps *const ps, int i)
 			ft_putstr("rrr\n");
 }
 
-
 static void	sort_tree(t_ps *const ps)
 {
 	if (ps->a[0].number > ps->a[2].number && ps->a[0].number < ps->a[1].number)
@@ -105,7 +104,6 @@ static void	little_sort(t_ps *const ps)
 
 int			main(int ac, char **av)
 {
-	int		i;
 	t_ps	ps;
 
 	ft_bzero(&ps, sizeof(t_ps));

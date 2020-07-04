@@ -6,16 +6,33 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:39:13 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/02 16:31:35 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:36:10 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int		ps_position_a(t_ps *const ps, const int position_b)
+static int	ps_max(t_ps *const ps)
 {
-	int	i;
-	int	answer;
+	int		i;
+	int		max;
+
+	max = 0;
+	if (ps->len_a != 0)
+	{
+		max = 0;
+		i = ps->len_a;
+		while (--i > 0)
+			if (ps->a[i].number > ps->a[max].number)
+				max = i;
+	}
+	return (max);
+}
+
+int			ps_position_a(t_ps *const ps, const int position_b)
+{
+	int		i;
+	int		answer;
 
 	if (1 == ps->len_a)
 		return (ps->b[position_b].number > ps->a[0].number) ? 0 : 1;
@@ -39,11 +56,10 @@ int		ps_position_a(t_ps *const ps, const int position_b)
 	return (answer);
 }
 
-int		weight_b_to_a(t_ps *const ps, const int position_b)
+int			weight_b_to_a(t_ps *const ps, const int position_b)
 {
-	int	count;
-	int	position_a;
-	int	temp;
+	int		count;
+	int		position_a;
 
 	count = 0;
 	position_a = ps_position_a(ps, position_b);
@@ -61,44 +77,11 @@ int		weight_b_to_a(t_ps *const ps, const int position_b)
 	return (++count);
 }
 
-// int		ps_min(t_ps *const ps)
-// {
-// 	int	i;
-// 	int	min;
-
-// 	if (ps->len_a != 0)
-// 	{
-// 		min = 0;
-// 		i = ps->len_a;
-// 		while (--i > 0)
-// 			if (ps->a[i].number < ps->a[min].number)
-// 				min = i;
-// 	}
-// 	return (min);
-// }
-
-
-int		ps_max(t_ps *const ps)
+void		ps_index_set(t_ps *const ps)
 {
-	int	i;
-	int	max;
-
-	if (ps->len_a != 0)
-	{
-		max = 0;
-		i = ps->len_a;
-		while (--i > 0)
-			if (ps->a[i].number > ps->a[max].number)
-				max = i;
-	}
-	return (max);
-}
-
-void	ps_index_set(t_ps *const ps)
-{
-	int	i;
-	int	j;
-	int	max;
+	int		i;
+	int		j;
+	int		max;
 
 	i = 0;
 	while (++i <= ps->len_a)

@@ -1,4 +1,0 @@
-"1 5 7 9 11 6 4" "pb|rra|pb|pb|rra|pb|pb|pb|pb|pa|pa|pa|pa|pa|pa|pa"
-"56 78 13 91" "ra|sa|rra|sa"
- "3 2 1 0" "rra|pb|sa|rra|pa"
- 

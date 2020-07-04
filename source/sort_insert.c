@@ -6,45 +6,14 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:43:54 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/02 19:04:17 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:35:24 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-
-// int		weight_on_compare(t_ps *const ps)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	temp;
-// 	int	min;
-
-// 	i = ps->len_a - 1;
-// 	while (i > 0)
-// 	{
-// 		temp = ps->a[i].index;
-// 		ps->a[i].weight = 1;
-// 		j = i;
-// 		while (--j > 0)
-// 			if (temp > ps->a[j].index)
-// 			{
-// 				ps->a[i].weight += 1;
-// 				temp = ps->a[j].index;
-// 			}
-// 		--i;
-// 	}
-// 	temp = 0;
-// 	i = ps->len_a;
-// 	while (--i > 0)
-// 		if (ps->a[i].weight >= ps->a[temp].weight)
-// 			temp = i;
-// 	return (ps->a[temp].weight);
-// }
-
 static void	ps_insert(t_ps *const ps, const int position_b)
 {
-	int		count;
 	int		position_a;
 	int		temp;
 
@@ -117,10 +86,10 @@ static void	ps_sort_insert_two(t_ps *const ps)
 	transporter(ps);
 }
 
-void	ps_sort_insert(t_ps *const ps)
+void		ps_sort_insert(t_ps *const ps)
 {
-	int	i;
-	int	temp;
+	int		i;
+	int		temp;
 
 	temp = (first_sort(ps, 1) > first_sort(ps, 2)) ? first_sort(ps, 1) :
 														first_sort(ps, 2);

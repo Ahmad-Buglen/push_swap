@@ -6,17 +6,17 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:37:50 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/02 19:04:27 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:32:25 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int		first_sort(t_ps *const ps, const int algo)
+int			first_sort(t_ps *const ps, const int algo)
 {
-	int	i;
-	int	j;
-	int	temp;
+	int		i;
+	int		j;
+	int		temp;
 
 	i = ps->len_a - 1;
 	while (i > 0)
@@ -52,7 +52,8 @@ static int	compare(const int elem, const int *const mas, const int size)
 	return (0);
 }
 
-static int	search(t_ps *const ps, t_test test, const int size, int *const rezult)
+static int	search(t_ps *const ps, t_test test, const int size,
+												int *const rezult)
 {
 	int		i;
 	int		j;
@@ -90,9 +91,9 @@ static void	replace(t_ps *const ps, int *const positions, const int replace)
 	ps->len_o -= 1;
 }
 
-void	optimization(t_ps *const ps)
+void		optimization(t_ps *const ps)
 {
-	int	rezult[2];
+	int		rezult[2];
 
 	while (search(ps, (t_test){RA, RB, RR, RRA, SA}, 5, rezult) > 0)
 		replace(ps, rezult, RR);
