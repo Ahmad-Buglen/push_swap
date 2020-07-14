@@ -6,7 +6,7 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 19:24:18 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/04 16:35:13 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:35:55 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ static int	length_digit(const char *const str)
 
 static void	add_elem(t_ps *const ps, const char *const str)
 {
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (!(ft_isdigit(str[i]) || '-' == str[i] || '+' == str[i] ||
+														ft_is_space(str[i])))
+			ft_exit_fail("Error\n");
 	if (!ps_duplicate(ps, ft_atol(str)) &&
 			ps->len_a < SIZE &&
 			length_digit(str) <= LEN_INT &&

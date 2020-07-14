@@ -6,13 +6,13 @@
 /*   By: dphyliss <dphyliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:26:22 by dphyliss          #+#    #+#             */
-/*   Updated: 2020/07/04 16:33:43 by dphyliss         ###   ########.fr       */
+/*   Updated: 2020/07/14 14:21:26 by dphyliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void		oper_add(t_ps *const ps, const int oper)
+void			oper_add(t_ps *const ps, const int oper)
 {
 	ps->oper[ps->len_o++] = oper;
 	if (SA == oper)
@@ -39,7 +39,7 @@ void		oper_add(t_ps *const ps, const int oper)
 		ps_rrr(ps);
 }
 
-static void	oper_print(t_ps *const ps, int i)
+static void		oper_print(t_ps *const ps, int i)
 {
 	while (++i < ps->len_o)
 		if (SA == ps->oper[i])
@@ -66,7 +66,7 @@ static void	oper_print(t_ps *const ps, int i)
 			ft_putstr("rrr\n");
 }
 
-static void	sort_tree(t_ps *const ps)
+static void		sort_tree(t_ps *const ps)
 {
 	if (ps->a[0].number > ps->a[2].number && ps->a[0].number < ps->a[1].number)
 	{
@@ -90,7 +90,7 @@ static void	sort_tree(t_ps *const ps)
 		oper_add(ps, RA);
 }
 
-static void	little_sort(t_ps *const ps)
+static void		little_sort(t_ps *const ps)
 {
 	while (ps->len_a > 3)
 		oper_add(ps, PB);
@@ -102,9 +102,9 @@ static void	little_sort(t_ps *const ps)
 		transporter(ps);
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	t_ps	ps;
+	static t_ps	ps;
 
 	ft_bzero(&ps, sizeof(t_ps));
 	if (ac > 1)
