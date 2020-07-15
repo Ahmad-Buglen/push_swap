@@ -51,14 +51,14 @@ all: $(LIB) $(PUSH_SWAP) $(CHECKER)
 $(LIB):
 	make -C libft/
 
-$(PUSH_SWAP): $(OBJ_PS) $(OBJ_BASE)
+$(PUSH_SWAP): $(OBJ_PS) $(OBJ_BASE) $(LIB)
 	$(CC) $^ $(LIB) -o $@
 
 $(OBJ_PS): $(HEADER)
 
 $(OBJ_BASE): $(HEADER)
 
-$(CHECKER): $(OBJ_CH) $(OBJ_BASE)
+$(CHECKER): $(OBJ_CH) $(OBJ_BASE) $(LIB)
 	$(CC) $^ $(LIB) -o $@
 
 $(OBJ_CH): $(HEADER)
