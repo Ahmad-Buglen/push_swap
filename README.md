@@ -1,5 +1,7 @@
 # push_swap
 
+The goal of this project was to sort numbers using two stacks with only 11 operations to operate stacks.
+
 [Методичка | Subject ](https://github.com/Binary-Hackers/42_Subjects/blob/master/00_Projects/02_Algorithmic/push_swap.pdf)
 
 | instructions  | Description   |
