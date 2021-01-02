@@ -23,3 +23,15 @@ Restrictions:
 2. no more than 12 operations for 5 integers
 3. no more than 700 operations for 100 integers
 4. no more than 5300 operations for 500 integers
+
+
+## Installation:
+
+```
+git clone https://github.com/Ahmad-Buglen/push_swap.git; cd push_swap; make
+```
+
+## Usage:
+```
+ARG=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG
+```
