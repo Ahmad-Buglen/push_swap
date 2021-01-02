@@ -17,3 +17,9 @@ The goal of this project was to sort numbers using two stacks with only 11 opera
 | rra           | rotates stuck A down by one |
 | rrb           | rotates stuck B down by one |
 | rrr           | rotates both A and B down by one |
+
+Restrictions: 
+1. no more than 2-3 operations for 3 integers
+2. no more than 12 operations for 5 integers
+3. no more than 700 operations for 100 integers
+4. no more than 5300 operations for 500 integers
